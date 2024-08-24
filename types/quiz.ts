@@ -1,12 +1,6 @@
-export interface QuizBase {
-  category: string;
-  questions: Question[];
-}
-
-export interface Question {
-  question: string;
-  options: Record<string, string>;
-  correctAnswer: string;
+export interface Course {
+  courseName: string;
+  categories: Category[];
 }
 
 export interface Category {
@@ -14,25 +8,24 @@ export interface Category {
   questions: Question[];
 }
 
-export interface Course {
-  courseName: string;
-  categories: Category[];
-}
-
-export interface Quiz extends QuizBase {}
-
-export interface DetailedQuestionResult {
+export interface Question {
+  category: string;
   question: string;
   options: Record<string, string>;
   correctAnswer: string;
-  selectedAnswer: string;
-  isCorrect: boolean;
-  explanation: string;
 }
 
 export interface QuizResult {
-  category: string;
-  detailedResults: DetailedQuestionResult[];
-  score: number;
-  dateTaken: Date;
+  quizName: string;
+  courseName: string;
+  numCorrect: number;
+  totalQuestions: number;
+  questions: DetailedQuestionResult[];
+}
+
+export interface DetailedQuestionResult {
+  question: Question;
+  selectedAnswer: string;
+  isCorrect: boolean;
+  explanation: string;
 }

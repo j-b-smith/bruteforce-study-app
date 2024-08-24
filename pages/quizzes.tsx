@@ -35,11 +35,11 @@ const Quizzes = () => {
       quizQuestions = testGenerator.generateComprehensiveQuiz(courseName);
     }
 
-    // Store quizQuestions in state, context, or pass it as a query parameter
-    router.push({
-      pathname: "/quiz",
-      query: { courseName, categoryName, questions: JSON.stringify(quizQuestions) }
-    });
+    // Store the quiz and retrieve its ID
+    const quizId = QuizService.storeQuiz(quizQuestions);
+
+    // Route to the quiz page using the quiz ID
+    router.push(`/quiz/${quizId}`);
   };
 
   return (
