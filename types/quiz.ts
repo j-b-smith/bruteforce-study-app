@@ -11,8 +11,13 @@ export interface Category {
 export interface Question {
   category: string;
   question: string;
-  options: Record<string, string>;
-  correctAnswer: string;
+  options: Option[];
+}
+
+export interface Option {
+  answerText: string;
+  explanationText: string;
+  isCorrect: boolean;
 }
 
 export interface QuizResult {

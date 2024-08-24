@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider>
       <Box display="flex" flexDirection="column" minHeight="100vh">
         <Navbar />
-        <Box flex="1">
+        <Box flex="1" pt={8}>
           <Component {...pageProps} />
         </Box>
         <Footer />

@@ -1,5 +1,5 @@
 import apyIIData from '../public/data/anatomyAndPhysiologyIICourse'
-import { Course, Category, Question, QuizResult, DetailedQuestionResult } from '../types/quiz';
+import { Course, Category, Question, QuizResult } from '../types/quiz';
 
 class QuizService {
   private courses: Course[];

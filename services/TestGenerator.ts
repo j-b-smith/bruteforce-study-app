@@ -1,6 +1,4 @@
-// services/TestGenerator.ts
-
-import { Course, Question } from "../types/quiz";
+import { Course, Question, Option } from "../types/quiz";
 
 class TestGenerator {
   private courses: Course[];
@@ -9,7 +7,7 @@ class TestGenerator {
     this.courses = courses;
   }
 
-  // Randomize the order of questions in an array
+  // Randomize the order of items in an array
   private shuffleArray<T>(array: T[]): T[] {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -20,10 +18,10 @@ class TestGenerator {
 
   // Randomize the options within each question
   private shuffleQuestionOptions(question: Question): Question {
-    const shuffledOptions = this.shuffleArray(Object.entries(question.options));
+    const shuffledOptions = this.shuffleArray(question.options); // Shuffle the options array directly
     return {
       ...question,
-      options: Object.fromEntries(shuffledOptions),
+      options: shuffledOptions,
     };
   }
 

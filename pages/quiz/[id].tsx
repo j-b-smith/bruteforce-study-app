@@ -7,7 +7,7 @@ import QuestionDisplay from "../../components/QuestionDisplay";
 
 const QuizPage = () => {
   const router = useRouter();
-  const { id, mode: queryMode, timer } = router.query;
+  const { id, mode: queryMode } = router.query;
   const quizId = parseInt(id as string, 10);
   const mode = queryMode as "prep" | "study";
   const quizQuestions = QuizService.getQuizById(quizId) || [];
@@ -40,13 +40,14 @@ const QuizPage = () => {
 
   const handleSubmitAnswer = () => {
     const currentQuestion = quizQuestions[currentQuestionIndex];
-    const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
+    const selectedOption = currentQuestion.options.find(option => option.answerText === selectedAnswer);
+    const isCorrect = selectedOption?.isCorrect ?? false;
 
     const detailedResult: DetailedQuestionResult = {
       question: currentQuestion,
       selectedAnswer,
       isCorrect,
-      explanation: currentQuestion.options[selectedAnswer],
+      explanation: selectedOption?.explanationText || "",
     };
 
     const updatedResults = [...quizResults];
@@ -85,13 +86,33 @@ const QuizPage = () => {
   // Function to answer all questions randomly and submit the quiz
   const handleRandomAnswerAndSubmit = () => {
     const randomResults: DetailedQuestionResult[] = quizQuestions.map((question) => {
-      const options = Object.keys(question.options);
-      const randomAnswer = options[Math.floor(Math.random() * options.length)];
+      if (question.options.length === 0) {
+        // Handle case where there are no options
+        return {
+          question: question,
+          selectedAnswer: "",
+          isCorrect: false,
+          explanation: "No options available.",
+        };
+      }
+
+      const randomOption = question.options[Math.floor(Math.random() * question.options.length)];
+      
+      if (!randomOption) {
+        // If for some reason randomOption is still undefined
+        return {
+          question: question,
+          selectedAnswer: "",
+          isCorrect: false,
+          explanation: "No valid option selected.",
+        };
+      }
+
       return {
         question: question,
-        selectedAnswer: randomAnswer,
-        isCorrect: randomAnswer === question.correctAnswer,
-        explanation: question.options[randomAnswer],
+        selectedAnswer: randomOption.answerText,
+        isCorrect: randomOption.isCorrect,
+        explanation: randomOption.explanationText,
       };
     });
 
@@ -120,6 +141,7 @@ const QuizPage = () => {
         <Box p={[2, 4]} borderWidth="1px" borderRadius="lg">
           <QuestionDisplay
             question={currentQuestion}
+            questionIndex={currentQuestionIndex} // Pass the question index to the QuestionDisplay component
             selectedAnswer={selectedAnswer}
             showResult={showResult}
             mode={mode}
