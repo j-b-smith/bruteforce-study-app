@@ -2,7 +2,16 @@
 
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Box, Heading, VStack, Text, HStack, Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { 
+  Box, 
+  Heading, 
+  VStack, 
+  Text, 
+  HStack, 
+  CircularProgress, 
+  CircularProgressLabel, 
+  Progress 
+} from "@chakra-ui/react";
 import QuizService from "../../../services/QuizService";
 import { QuizResult } from "../../../types/quiz";
 import QuestionDisplay from "../../../components/QuestionDisplay";
@@ -49,15 +58,31 @@ const QuizResultPage = () => {
           <Text fontWeight="bold">{category}</Text>
           <HStack align="center" spacing={4}>
             <Text>Correct:</Text>
+            <Progress value={correctPercentage} colorScheme="green" size="sm" flex={1} />
             <Text>{stats.correct}/{stats.total} ({correctPercentage}%)</Text>
           </HStack>
-          <HStack align="center" spacing={4}>
+          <HStack align="center" spacing={4} mt={2}>
             <Text>Incorrect:</Text>
+            <Progress value={incorrectPercentage} colorScheme="red" size="sm" flex={1} />
             <Text>{stats.total - stats.correct}/{stats.total} ({incorrectPercentage}%)</Text>
           </HStack>
         </Box>
       );
     });
+  };
+
+  const renderCircularProgress = () => {
+    if (!quizResult) return null;
+
+    const correctPercentage = Math.floor((quizResult.numCorrect / quizResult.totalQuestions) * 100);
+
+    return (
+      <CircularProgress value={correctPercentage} color="green.400" size="120px">
+        <CircularProgressLabel>
+          {correctPercentage}%
+        </CircularProgressLabel>
+      </CircularProgress>
+    );
   };
 
   return (
@@ -74,24 +99,7 @@ const QuizResultPage = () => {
               <Text>Score: {quizResult.numCorrect} / {quizResult.totalQuestions}</Text>
             </VStack>
             <VStack>
-              <Tabs variant="soft-rounded" colorScheme="teal">
-                <TabList>
-                  <Tab>Correct</Tab>
-                  <Tab>Incorrect</Tab>
-                </TabList>
-                <TabPanels>
-                  <TabPanel>
-                    <Text fontSize="2xl" color="green.500">
-                      {Math.floor((quizResult.numCorrect / quizResult.totalQuestions) * 100)}%
-                    </Text>
-                  </TabPanel>
-                  <TabPanel>
-                    <Text fontSize="2xl" color="red.500">
-                      {Math.floor(100 - (quizResult.numCorrect / quizResult.totalQuestions) * 100)}%
-                    </Text>
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
+              {renderCircularProgress()}
             </VStack>
           </HStack>
         </Box>

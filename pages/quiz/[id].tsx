@@ -1,28 +1,21 @@
-// pages/quiz/[id].tsx
-
 import { useRouter } from "next/router";
 import { Box, Heading, Button, HStack, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import QuizService from "../../services/QuizService";
 import { DetailedQuestionResult } from "../../types/quiz";
 import QuestionDisplay from "../../components/QuestionDisplay";
-import ModeSelectionModal from "../../components/ModeSelectionModal"; // Import the modal
 
 const QuizPage = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const { id, mode: queryMode, timer } = router.query;
   const quizId = parseInt(id as string, 10);
+  const mode = queryMode as "prep" | "study";
   const quizQuestions = QuizService.getQuizById(quizId) || [];
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [showResult, setShowResult] = useState(false);
-  const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>(false);
   const [quizResults, setQuizResults] = useState<DetailedQuestionResult[]>([]);
-  const [mode, setMode] = useState<"prep" | "study">("study"); // Default mode
-  const [timer, setTimer] = useState<number | undefined>(undefined); // Timer for Test Prep Mode
-
-  const [isModeSelectionOpen, setModeSelectionOpen] = useState(true);
 
   useEffect(() => {
     if (!quizQuestions.length) {
@@ -30,14 +23,16 @@ const QuizPage = () => {
     }
   }, [quizQuestions, router]);
 
-  const handleModeSelect = (selectedMode: "prep" | "study", selectedTimer?: number) => {
-    setMode(selectedMode);
-    setTimer(selectedTimer);
-    if (selectedMode === "prep" && selectedTimer) {
-      setTimeout(handleSubmitQuiz, selectedTimer * 1000 * 60); // Auto-submit after the timer ends
+  useEffect(() => {
+    const savedResult = quizResults[currentQuestionIndex];
+    if (savedResult) {
+      setSelectedAnswer(savedResult.selectedAnswer);
+      setShowResult(mode === "study");
+    } else {
+      setSelectedAnswer("");
+      setShowResult(false);
     }
-    setModeSelectionOpen(false); // Close the modal and start the quiz
-  };
+  }, [currentQuestionIndex, quizResults, mode]);
 
   const handleAnswerSelect = (value: string) => {
     setSelectedAnswer(value);
@@ -46,54 +41,42 @@ const QuizPage = () => {
   const handleSubmitAnswer = () => {
     const currentQuestion = quizQuestions[currentQuestionIndex];
     const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
-    setIsAnswerCorrect(isCorrect);
-    setShowResult(true);
 
     const detailedResult: DetailedQuestionResult = {
-      question: currentQuestion, // Store the entire question object
+      question: currentQuestion,
       selectedAnswer,
       isCorrect,
       explanation: currentQuestion.options[selectedAnswer],
     };
 
-    setQuizResults([...quizResults, detailedResult]);
+    const updatedResults = [...quizResults];
+    updatedResults[currentQuestionIndex] = detailedResult;
+
+    setQuizResults(updatedResults);
+    setShowResult(true);
   };
 
   const handleNextQuestion = () => {
-    setShowResult(false);
-    setSelectedAnswer("");
     if (currentQuestionIndex < quizQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      handleSubmitQuiz(); // Automatically submit when reaching the last question
     }
   };
 
   const handlePreviousQuestion = () => {
     if (currentQuestionIndex > 0) {
-      setShowResult(false);
-      setSelectedAnswer("");
       setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
   };
 
   const handleSubmitQuiz = () => {
-    const quizResult: DetailedQuestionResult[] = quizQuestions.map((question, index) => {
-      const selectedAnswer = quizResults[index]?.selectedAnswer || "";
-      const isCorrect = selectedAnswer === question.correctAnswer;
-
-      return {
-        question: question, // Store the entire question object
-        selectedAnswer: selectedAnswer,
-        isCorrect: isCorrect,
-        explanation: question.options[selectedAnswer],
-      };
-    });
-
     QuizService.saveQuizResult(quizId, {
       quizName: `Quiz ${quizId}`,
       courseName: "Sample Course", // This should be dynamic based on your data
-      numCorrect: quizResult.filter(result => result.isCorrect).length,
-      totalQuestions: quizResult.length,
-      questions: quizResult,
+      numCorrect: quizResults.filter(result => result.isCorrect).length,
+      totalQuestions: quizQuestions.length,
+      questions: quizResults,
     });
 
     router.push(`/quiz/${quizId}/result`); // Navigate to results page after completing the quiz
@@ -139,7 +122,8 @@ const QuizPage = () => {
             question={currentQuestion}
             selectedAnswer={selectedAnswer}
             showResult={showResult}
-            mode={mode} // Pass mode to the QuestionDisplay component
+            mode={mode}
+            onSelectAnswer={handleAnswerSelect}
           />
           <HStack mt={4} spacing={4}>
             {currentQuestionIndex > 0 && (
@@ -173,13 +157,6 @@ const QuizPage = () => {
       <Button mt={8} colorScheme="blue" onClick={handleRandomAnswerAndSubmit}>
         Answer All Randomly and Submit
       </Button>
-
-      {/* Mode Selection Modal */}
-      <ModeSelectionModal
-        isOpen={isModeSelectionOpen}
-        onClose={() => setModeSelectionOpen(false)}
-        onModeSelect={handleModeSelect}
-      />
     </Box>
   );
 };

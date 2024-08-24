@@ -1,46 +1,18 @@
-// pages/quizzes.tsx
-
-import {
-  Box,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import QuizService from "../services/QuizService";
-import TestGenerator from "../services/TestGenerator";
 import { Course } from "../types/quiz";
-import CourseCard from "../components/CourseCard";
+import TakeQuizTab from "../components/tabs/TakeQuizTab";
+import QuizResultsTab from "../components/tabs/QuizResultsTab";
+import CreateCustomTestTab from "../components/tabs/CreateCustomTestTab";
 
 const Quizzes = () => {
   const [courses, setCourses] = useState<Course[]>([]);
-  const router = useRouter();
 
   useEffect(() => {
     const allCourses = QuizService.getAllCourses();
     setCourses(allCourses);
   }, []);
-
-  const handleStartQuiz = (courseName: string, categoryName?: string) => {
-    const testGenerator = new TestGenerator(courses);
-
-    let quizQuestions = [];
-    if (categoryName) {
-      quizQuestions = testGenerator.generateCategoryQuiz(courseName, categoryName);
-    } else {
-      quizQuestions = testGenerator.generateComprehensiveQuiz(courseName);
-    }
-
-    // Store the quiz and retrieve its ID
-    const quizId = QuizService.storeQuiz(quizQuestions);
-
-    // Route to the quiz page using the quiz ID
-    router.push(`/quiz/${quizId}`);
-  };
 
   return (
     <Box p={4}>
@@ -52,27 +24,13 @@ const Quizzes = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <VStack spacing={4} align="stretch">
-              {courses.map((course, index) => (
-                <CourseCard
-                  key={index}
-                  courseName={course.courseName}
-                  description={`Course Description for ${course.courseName}`}
-                  categories={course.categories}
-                  onStartQuiz={handleStartQuiz}
-                />
-              ))}
-            </VStack>
+            <TakeQuizTab courses={courses} />
           </TabPanel>
           <TabPanel>
-            <VStack spacing={4} align="stretch">
-              {/* Display Quiz Results Here */}
-            </VStack>
+            <QuizResultsTab />
           </TabPanel>
           <TabPanel>
-            <VStack spacing={4} align="stretch">
-              {/* Custom Test Builder */}
-            </VStack>
+            <CreateCustomTestTab />
           </TabPanel>
         </TabPanels>
       </Tabs>
