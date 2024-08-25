@@ -6,12 +6,37 @@ import {
   useDisclosure,
   Icon,
   Spacer,
+  Button,
+  Avatar,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, AtSignIcon, InfoIcon, SettingsIcon } from "@chakra-ui/icons";
 import Link from "next/link";
+import { memo, useCallback } from "react";
+import { User } from "../types/user"; 
+import { signOut } from "firebase/auth";
+import { auth } from "../firebaseConfig";
 
-const Navbar = () => {
+// Define the props interface
+interface NavbarProps {
+  user: User | null;
+}
+
+// Memoize the Navbar component to prevent unnecessary re-renders
+const Navbar: React.FC<NavbarProps> = memo(({ user }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // Handle user logout
+  const handleLogout = useCallback(async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
+  }, []);
 
   return (
     <Box
@@ -26,11 +51,11 @@ const Navbar = () => {
       boxShadow="md"
       mb={4}
     >
-      <Flex h={4} alignItems="center" justifyContent="space-between">
+      <Flex h={8} alignItems="center" justifyContent="space-between">
         <Box color="white" fontWeight="bold" fontSize="lg">
           MyApp
         </Box>
-        <Spacer />  {/* Spacer pushes the next HStack to the right */}
+        <Spacer />
         <IconButton
           size="md"
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -42,38 +67,60 @@ const Navbar = () => {
         />
         <HStack
           as="nav"
-          spacing={6}  // Increased spacing for a more open feel
+          spacing={6}
           display={{ base: "none", md: "flex" }}
           color="white"
         >
-          <Link href="/">
-            <Box display="flex" alignItems="center">
+          <Link href="/" passHref>
+            <Box display="flex" alignItems="center" cursor="pointer">
               <Icon as={AtSignIcon} />
               <Box ml={2}>Home</Box>
             </Box>
           </Link>
-          <Link href="/quizzes">
-            <Box display="flex" alignItems="center">
+          <Link href="/quizzes" passHref>
+            <Box display="flex" alignItems="center" cursor="pointer">
               <Icon as={InfoIcon} />
               <Box ml={2}>Quizzes</Box>
             </Box>
           </Link>
-          <Link href="/flashcards">
-            <Box display="flex" alignItems="center">
+          <Link href="/flashcards" passHref>
+            <Box display="flex" alignItems="center" cursor="pointer">
               <Icon as={InfoIcon} />
               <Box ml={2}>Flashcards</Box>
             </Box>
           </Link>
-          <Link href="/settings">
-            <Box display="flex" alignItems="center">
+          <Link href="/settings" passHref>
+            <Box display="flex" alignItems="center" cursor="pointer">
               <Icon as={SettingsIcon} />
               <Box ml={2}>Settings</Box>
             </Box>
           </Link>
+
+          {user ? (
+            <Menu>
+              <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha">
+                <HStack spacing={2}>
+                  <Avatar size="sm" src={user.photoURL || ""} />
+                  <Box>{user.displayName || user.email}</Box>
+                </HStack>
+              </MenuButton>
+              <MenuList>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </MenuList>
+            </Menu>
+          ) : (
+            <Link href="/login" passHref>
+              <Button variant="outline" colorScheme="whiteAlpha">
+                Login
+              </Button>
+            </Link>
+          )}
         </HStack>
       </Flex>
     </Box>
   );
-};
+});
+
+Navbar.displayName = "Navbar";
 
 export default Navbar;
