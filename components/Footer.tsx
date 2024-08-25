@@ -3,8 +3,21 @@ import { Box, Text } from "@chakra-ui/react";
 
 const Footer = () => {
   return (
-    <Box bg="purple.500" color="white" py={2} textAlign="center" mt="auto">
-      <Text fontSize="sm">© 2024 MyApp. All rights reserved.</Text>
+    <Box
+      as="footer"
+      bg="purple.600"
+      color="white"
+      py={2}
+      px={4}
+      position="fixed"
+      bottom={0}
+      left={0}
+      width="100%"
+      textAlign="center"
+      fontSize="sm" // Making the text smaller for a minimalist look
+      boxShadow="0 -1px 3px rgba(0, 0, 0, 0.1)" // Adding a slight shadow to separate the footer from content
+    >
+      <Text>&copy; {new Date().getFullYear()} BruteforceStudy</Text>
     </Box>
   );
 };

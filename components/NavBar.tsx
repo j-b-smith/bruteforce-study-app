@@ -53,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ user }) => {
     >
       <Flex h={8} alignItems="center" justifyContent="space-between">
         <Box color="white" fontWeight="bold" fontSize="lg">
-          MyApp
+          BruteforceStudy
         </Box>
         <Spacer />
         <IconButton

@@ -1,5 +1,19 @@
+import { User } from "../types/user";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+
+export const saveUserToFirestore = async (user: User) => {
+  const userDoc = doc(db, "users", user.uid);
+  const userToSave = {
+    uid: user.uid,
+    email: user.email,
+    displayName: user.displayName,
+    photoURL: user.photoURL,
+    quizResults: user.quizResults || [],
+  };
+  await setDoc(userDoc, userToSave);
+};
+
 
 // Save user preferences
 export const saveUserPreferences = async (userId: string, preferences: object) => {

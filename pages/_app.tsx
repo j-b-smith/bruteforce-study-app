@@ -27,9 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   //       setUser(mappedUser);
   //     } else {
   //       setUser(null);
-  //       if (router.pathname !== "/login") {
-  //         router.push("/login");
-  //       }
+  //       router.push("/login");
   //     }
   //     setLoading(false);
   //   });
@@ -50,7 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} user={user} /> {/* Pass the user state to the page components */}
         </Box>
 
-        <Footer />
+        <Footer /> {/* Footer stays fixed on the screen */}
       </Box>
     </ChakraProvider>
   );
