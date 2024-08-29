@@ -33,7 +33,7 @@ class QuizService {
   }
 
   getCategoriesByCourse(courseName: string): Category[] {
-    const course = this.courses.find(c => c.courseName === courseName);
+    const course = this.courses.find(c => c.name === courseName);
     return course ? course.categories : [];
   }
 
@@ -47,7 +47,7 @@ class QuizService {
 
   getQuestionsByCategory(courseName: string, categoryName: string): Question[] {
     const categories = this.getCategoriesByCourse(courseName);
-    const category = categories.find(cat => cat.categoryName === categoryName);
+    const category = categories.find(cat => cat.name === categoryName);
     return category ? category.questions : [];
   }
 

@@ -6,37 +6,13 @@ import {
   useDisclosure,
   Icon,
   Spacer,
-  Button,
-  Avatar,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, AtSignIcon, InfoIcon, SettingsIcon } from "@chakra-ui/icons";
 import Link from "next/link";
-import { memo, useCallback } from "react";
-import { User } from "../types/user"; 
-import { signOut } from "firebase/auth";
-import { auth } from "../firebaseConfig";
+import { memo } from "react";
 
-// Define the props interface
-interface NavbarProps {
-  user: User | null;
-}
-
-// Memoize the Navbar component to prevent unnecessary re-renders
-const Navbar: React.FC<NavbarProps> = memo(({ user }) => {
+const Navbar: React.FC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  // Handle user logout
-  const handleLogout = useCallback(async () => {
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.error("Error signing out: ", error);
-    }
-  }, []);
 
   return (
     <Box
@@ -95,26 +71,6 @@ const Navbar: React.FC<NavbarProps> = memo(({ user }) => {
               <Box ml={2}>Settings</Box>
             </Box>
           </Link>
-
-          {user ? (
-            <Menu>
-              <MenuButton as={Button} variant="ghost" colorScheme="whiteAlpha">
-                <HStack spacing={2}>
-                  <Avatar size="sm" src={user.photoURL || ""} />
-                  <Box>{user.displayName || user.email}</Box>
-                </HStack>
-              </MenuButton>
-              <MenuList>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-              </MenuList>
-            </Menu>
-          ) : (
-            <Link href="/login" passHref>
-              <Button variant="outline" colorScheme="whiteAlpha">
-                Login
-              </Button>
-            </Link>
-          )}
         </HStack>
       </Flex>
     </Box>

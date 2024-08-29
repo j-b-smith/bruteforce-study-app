@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
-import { Box, Heading, Button, HStack, Text } from "@chakra-ui/react";
+import { Box, Heading, Button } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import QuizService from "../../services/QuizService";
 import { DetailedQuestionResult } from "../../types/quiz";
-import QuestionDisplay from "../../components/QuestionDisplay";
+import QuestionDisplay from "../../components/question/QuestionDisplay";
+import QuestionNavigation from "../../components/question/QuestionNavigation";
+import QuizSummary from "../../components/question/QuizSummary";
 
 const QuizPage = () => {
   const router = useRouter();
@@ -40,14 +42,14 @@ const QuizPage = () => {
 
   const handleSubmitAnswer = () => {
     const currentQuestion = quizQuestions[currentQuestionIndex];
-    const selectedOption = currentQuestion.options.find(option => option.answerText === selectedAnswer);
+    const selectedOption = currentQuestion.options.find(option => option.text === selectedAnswer);
     const isCorrect = selectedOption?.isCorrect ?? false;
 
     const detailedResult: DetailedQuestionResult = {
       question: currentQuestion,
       selectedAnswer,
       isCorrect,
-      explanation: selectedOption?.explanationText || "",
+      explanation: selectedOption?.explanation || "",
     };
 
     const updatedResults = [...quizResults];
@@ -95,9 +97,9 @@ const QuizPage = () => {
           explanation: "No options available.",
         };
       }
-
+  
       const randomOption = question.options[Math.floor(Math.random() * question.options.length)];
-      
+  
       if (!randomOption) {
         // If for some reason randomOption is still undefined
         return {
@@ -107,17 +109,17 @@ const QuizPage = () => {
           explanation: "No valid option selected.",
         };
       }
-
+  
       return {
         question: question,
-        selectedAnswer: randomOption.answerText,
+        selectedAnswer: randomOption.text,
         isCorrect: randomOption.isCorrect,
-        explanation: randomOption.explanationText,
+        explanation: randomOption.explanation || "No explanation provided.",
       };
     });
-
+  
     setQuizResults(randomResults);
-
+  
     // Simulate submitting the quiz
     QuizService.saveQuizResult(quizId, {
       quizName: `Quiz ${quizId}`,
@@ -126,9 +128,10 @@ const QuizPage = () => {
       totalQuestions: randomResults.length,
       questions: randomResults,
     });
-
+  
     router.push(`/quiz/${quizId}/result`);
   };
+  
 
   const currentQuestion = quizQuestions[currentQuestionIndex];
 
@@ -144,34 +147,19 @@ const QuizPage = () => {
             questionIndex={currentQuestionIndex} // Pass the question index to the QuestionDisplay component
             selectedAnswer={selectedAnswer}
             showResult={showResult}
-            mode={mode}
             onSelectAnswer={handleAnswerSelect}
           />
-          <HStack mt={4} spacing={4}>
-            {currentQuestionIndex > 0 && (
-              <Button colorScheme="purple" onClick={handlePreviousQuestion} size={["sm", "md"]}>
-                Back
-              </Button>
-            )}
-            {!showResult ? (
-              <Button colorScheme="purple" onClick={handleSubmitAnswer} isDisabled={!selectedAnswer} size={["sm", "md"]}>
-                Submit Answer
-              </Button>
-            ) : (
-              currentQuestionIndex < quizQuestions.length - 1 ? (
-                <Button colorScheme="purple" onClick={handleNextQuestion} size={["sm", "md"]}>
-                  Next Question
-                </Button>
-              ) : (
-                <Button colorScheme="green" onClick={handleSubmitQuiz} size={["sm", "md"]}>
-                  Submit Quiz
-                </Button>
-              )
-            )}
-          </HStack>
-          <Text mt={4} mb={2} fontSize="md">
-            Question {currentQuestionIndex + 1} of {quizQuestions.length}
-          </Text>
+          <QuestionNavigation
+            currentQuestionIndex={currentQuestionIndex}
+            totalQuestions={quizQuestions.length}
+            showResult={showResult}
+            onPrevious={handlePreviousQuestion}
+            onNext={handleNextQuestion}
+            onSubmit={handleSubmitAnswer}
+            onSubmitQuiz={handleSubmitQuiz}
+            selectedAnswer={selectedAnswer}
+          />
+          <QuizSummary currentQuestionIndex={currentQuestionIndex} totalQuestions={quizQuestions.length} />
         </Box>
       )}
 

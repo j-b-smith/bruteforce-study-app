@@ -1,0 +1,67 @@
+[
+    {
+        "category": "",
+        "flashcards": [
+            {
+                "front": "What is the endocrine system?",
+                "back": "A collection of ductless glands that secrete hormones into the bloodstream to regulate metabolism, growth, reproduction, and other body functions."
+            },
+            {
+                "front": "What is the role of the hypothalamus?",
+                "back": "Acts as the master regulator by producing releasing and inhibiting hormones that control the anterior pituitary gland."
+            },
+            {
+                "front": "What hormones are produced by the anterior pituitary gland?",
+                "back": "TSH (Thyroid-Stimulating Hormone), ACTH (Adrenocorticotropic Hormone), GH (Growth Hormone), LH (Luteinizing Hormone), FSH (Follicle-Stimulating Hormone), Prolactin."
+            },
+            {
+                "front": "What is the function of TSH (Thyroid-Stimulating Hormone)?",
+                "back": "Stimulates the thyroid gland to produce thyroid hormones (T3 and T4), which regulate metabolism."
+            },
+            {
+                "front": "What is the function of ACTH (Adrenocorticotropic Hormone)?",
+                "back": "Stimulates the adrenal cortex to release cortisol and other glucocorticoids."
+            },
+            {
+                "front": "What is the function of GH (Growth Hormone)?",
+                "back": "Promotes growth, cell reproduction, and regeneration in tissues, especially bones and muscles."
+            },
+            {
+                "front": "What is the function of LH (Luteinizing Hormone) and FSH (Follicle-Stimulating Hormone)?",
+                "back": "LH triggers ovulation and stimulates the production of sex hormones in the ovaries and testes; FSH stimulates the growth of ovarian follicles and sperm production."
+            },
+            {
+                "front": "What is the role of prolactin?",
+                "back": "Stimulates milk production in the mammary glands."
+            },
+            {
+                "front": "What hormones are stored and released by the posterior pituitary gland?",
+                "back": "ADH (Antidiuretic Hormone) and Oxytocin, both produced by the hypothalamus."
+            },
+            {
+                "front": "Cardiovascular System",
+                "back": "32. What are the main functions of the cardiovascular system?"
+            },
+            {
+                "front": "Lymphatic and Immune System",
+                "back": "54. What are the main functions of the lymphatic system?"
+            },
+            {
+                "front": "Respiratory System",
+                "back": "69. What are the primary functions of the respiratory system?"
+            },
+            {
+                "front": "Digestive System",
+                "back": "87. What is the main function of the digestive system?"
+            },
+            {
+                "front": "Urinary System",
+                "back": "111. What are the primary functions of the urinary system?"
+            },
+            {
+                "front": "Reproductive System",
+                "back": "135. What are the primary functions of the reproductive system?"
+            }
+        ]
+    }
+]

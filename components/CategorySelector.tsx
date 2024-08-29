@@ -1,13 +1,5 @@
-// components/CategorySelector.tsx
-
 import { VStack, Checkbox, CheckboxGroup, Stack } from "@chakra-ui/react";
-import { Category } from "../types/quiz";
-
-interface CategorySelectorProps {
-  categories: Category[];
-  selectedCategories: string[];
-  onCategorySelect: (selected: string[]) => void;
-}
+import { CategorySelectorProps } from "../types";
 
 const CategorySelector = ({
   categories,
@@ -23,8 +15,8 @@ const CategorySelector = ({
       >
         <Stack spacing={4}>
           {categories.map((category, index) => (
-            <Checkbox key={index} value={category.categoryName}>
-              {category.categoryName}
+            <Checkbox key={index} value={category.name}>
+              {category.name}
             </Checkbox>
           ))}
         </Stack>

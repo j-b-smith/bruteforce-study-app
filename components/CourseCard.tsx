@@ -1,15 +1,6 @@
-// components/CourseCard.tsx
-
 import { Box, Heading, Text, Button, VStack, Collapse, useDisclosure, IconButton } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import { Category } from "../types/quiz";
-
-interface CourseCardProps {
-  courseName: string;
-  description: string;
-  categories: Category[];
-  onStartQuiz: (courseName: string, categoryName?: string) => void;
-}
+import { CourseCardProps } from "../types/quiz";
 
 const CourseCard = ({ courseName, description, categories, onStartQuiz }: CourseCardProps) => {
   const { isOpen, onToggle } = useDisclosure();
@@ -40,8 +31,8 @@ const CourseCard = ({ courseName, description, categories, onStartQuiz }: Course
         <VStack spacing={4} mt={4} align="stretch">
           {categories.map((category, index) => (
             <Box key={index} p={4} borderWidth="1px" borderRadius="lg">
-              <Heading fontSize={["md", "lg"]}>{category.categoryName}</Heading>
-              <Button mt={2} colorScheme="purple" size={["sm", "md"]} onClick={() => onStartQuiz(courseName, category.categoryName)}>
+              <Heading fontSize={["md", "lg"]}>{category.name}</Heading>
+              <Button mt={2} colorScheme="purple" size={["sm", "md"]} onClick={() => onStartQuiz(courseName, category.name)}>
                 Take this Quiz
               </Button>
             </Box>

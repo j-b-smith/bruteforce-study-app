@@ -15,12 +15,12 @@ const Quizzes = () => {
   }, []);
 
   return (
-    <Box p={4}>
+    <Box p={[2, 4]}>
       <Tabs isFitted variant="enclosed">
         <TabList mb="1em">
-          <Tab>Take a Quiz</Tab>
-          <Tab>Quiz Results</Tab>
-          <Tab>Create Custom Test</Tab>
+          <Tab fontSize={["sm", "md"]}>Take a Quiz</Tab>
+          <Tab fontSize={["sm", "md"]}>Quiz Results</Tab>
+          <Tab fontSize={["sm", "md"]}>Create Custom Test</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
