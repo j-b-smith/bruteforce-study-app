@@ -1,20 +1,19 @@
-import apyIIData from '../public/data/anatomyAndPhysiologyIICourse'
 import { Course, Category, Question, QuizResult } from '../types/quiz';
+import QuestionService from './QuestionService'; // Import the new QuestionService
 
 class QuizService {
-  private courses: Course[];
   private quizStore: Record<number, Question[]> = {}; // Store quizzes by ID
   private quizResultsStore: Record<number, QuizResult[]> = {}; // Store quiz results by quiz ID
   private nextQuizId: number = 1; // ID counter for quizzes
 
   constructor() {
-    this.courses = [];
-    this.courses.push(apyIIData);
     this.initializeQuizzes(); // Call initializeQuizzes to populate the quizStore
   }
 
   private initializeQuizzes() {
-    this.courses.forEach(course => {
+    const courses = QuestionService.getAllCourses(); // Get courses from QuestionService
+
+    courses.forEach(course => {
       course.categories.forEach(category => {
         this.quizStore[this.nextQuizId] = category.questions;
         this.nextQuizId++;
@@ -33,8 +32,7 @@ class QuizService {
   }
 
   getCategoriesByCourse(courseName: string): Category[] {
-    const course = this.courses.find(c => c.name === courseName);
-    return course ? course.categories : [];
+    return QuestionService.getCategoriesByCourse(courseName); // Delegate to QuestionService
   }
 
   getQuizById(quizId: number): Question[] | null {
@@ -46,13 +44,11 @@ class QuizService {
   }
 
   getQuestionsByCategory(courseName: string, categoryName: string): Question[] {
-    const categories = this.getCategoriesByCourse(courseName);
-    const category = categories.find(cat => cat.name === categoryName);
-    return category ? category.questions : [];
+    return QuestionService.getQuestionsByCategory(courseName, categoryName); // Delegate to QuestionService
   }
 
   getAllCourses(): Course[] {
-    return this.courses.map(course => course);
+    return QuestionService.getAllCourses(); // Delegate to QuestionService
   }
 
   /**

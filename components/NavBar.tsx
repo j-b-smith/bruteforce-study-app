@@ -6,8 +6,10 @@ import {
   useDisclosure,
   Icon,
   Spacer,
+  Collapse,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon, AtSignIcon, InfoIcon, SettingsIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import MobileMenu from "./MobileMenu"; // Import the new MobileMenu component
 import Link from "next/link";
 import { memo } from "react";
 
@@ -49,30 +51,31 @@ const Navbar: React.FC = memo(() => {
         >
           <Link href="/" passHref>
             <Box display="flex" alignItems="center" cursor="pointer">
-              <Icon as={AtSignIcon} />
-              <Box ml={2}>Home</Box>
+              Home
             </Box>
           </Link>
           <Link href="/quizzes" passHref>
             <Box display="flex" alignItems="center" cursor="pointer">
-              <Icon as={InfoIcon} />
-              <Box ml={2}>Quizzes</Box>
+              Quizzes
             </Box>
           </Link>
           <Link href="/flashcards" passHref>
             <Box display="flex" alignItems="center" cursor="pointer">
-              <Icon as={InfoIcon} />
-              <Box ml={2}>Flashcards</Box>
+              Flashcards
             </Box>
           </Link>
           <Link href="/settings" passHref>
             <Box display="flex" alignItems="center" cursor="pointer">
-              <Icon as={SettingsIcon} />
-              <Box ml={2}>Settings</Box>
+              Settings
             </Box>
           </Link>
         </HStack>
       </Flex>
+
+      {/* Mobile Menu */}
+      <Collapse in={isOpen} animateOpacity>
+        <MobileMenu onClose={onClose} />
+      </Collapse>
     </Box>
   );
 });
