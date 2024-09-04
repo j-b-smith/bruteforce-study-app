@@ -6,6 +6,8 @@ interface FlashcardNavigationProps {
   onNext: () => void;
   currentIndex: number;
   total: number;
+  isFlipped: boolean;
+  onFlip: () => void;
 }
 
 const FlashcardNavigation: React.FC<FlashcardNavigationProps> = ({
@@ -13,7 +15,17 @@ const FlashcardNavigation: React.FC<FlashcardNavigationProps> = ({
   onNext,
   currentIndex,
   total,
+  isFlipped,
+  onFlip,
 }) => {
+  const handleNextClick = () => {
+    if (isFlipped) {
+      onNext();
+    } else {
+      onFlip();
+    }
+  };
+
   return (
     <HStack spacing={4} justifyContent="center" mt={4}>
       <Button
@@ -25,8 +37,8 @@ const FlashcardNavigation: React.FC<FlashcardNavigationProps> = ({
       </Button>
       <Button
         colorScheme="purple"
-        onClick={onNext}
-        isDisabled={currentIndex === total - 1}
+        onClick={handleNextClick}
+        isDisabled={currentIndex === total - 1 && isFlipped}
       >
         Next
       </Button>

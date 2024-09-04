@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import { Box, Button, Heading } from "@chakra-ui/react";
-import Flashcard from "./Flashcard";
-import FlashcardNavigation from "./FlashcardNavigation";
-import { Flashcard as FlashcardType } from "../../types/flashcard";
+import { Box, Button } from "@chakra-ui/react";
+import { Flashcard as FlashcardType } from "../../../types";
+import FlashcardNavigation from "../FlashcardNavigation/FlashcardNavigation";
+import Flashcard from "../flashcard/Flashcard";
+
+
 
 interface FlashcardStudyAreaProps {
   flashcards: FlashcardType[];
@@ -32,7 +34,11 @@ const FlashcardStudyArea: React.FC<FlashcardStudyAreaProps> = ({ flashcards, onR
   };
 
   const handleFlip = () => {
-    setIsFlipped(!isFlipped);
+    if (isFlipped) {
+      handleNext(); // Advance to the next card if the current card is flipped
+    } else {
+      setIsFlipped(true);
+    }
   };
 
   const currentFlashcard = flashcards[currentIndex];
@@ -66,6 +72,8 @@ const FlashcardStudyArea: React.FC<FlashcardStudyAreaProps> = ({ flashcards, onR
         onNext={handleNext}
         currentIndex={currentIndex}
         total={flashcards.length}
+        isFlipped={isFlipped}
+        onFlip={handleFlip}
       />
     </Box>
   );

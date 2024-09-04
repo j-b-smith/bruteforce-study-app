@@ -1,4 +1,4 @@
-import { Box, Text, Button } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 
 interface FlashcardProps {
@@ -11,6 +11,7 @@ interface FlashcardProps {
 const Flashcard: React.FC<FlashcardProps> = ({ front, back, isFlipped, onFlip }) => {
   return (
     <Box
+      data-cy="flashcard"
       p={6}
       borderWidth="1px"
       borderRadius="lg"

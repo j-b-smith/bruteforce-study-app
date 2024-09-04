@@ -12,19 +12,23 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
+    "@cypress/react18": "^2.0.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "ajv": "^8.17.1",
     "firebase": "^10.13.0",
     "framer-motion": "^11.3.30",
     "next": "14.2.6",
-    "react": "^18",
-    "react-dom": "^18"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "webpack": "^5.94.0"
   },
   "devDependencies": {
+    "@cypress/webpack-dev-server": "^3.11.0",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "cypress": "^13.13.3",
+    "@types/react": "^18.2.13",
+    "@types/react-dom": "^18.2.7",
+    "cypress": "^13.14.2",
     "eslint": "^8",
     "eslint-config-next": "14.2.6",
     "typescript": "^5.5.4"
