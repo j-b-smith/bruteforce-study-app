@@ -26,15 +26,16 @@ const QuizPage = () => {
   }, [quizQuestions, router]);
 
   useEffect(() => {
+    // Only set the initial state when navigating to the current question for the first time
     const savedResult = quizResults[currentQuestionIndex];
     if (savedResult) {
       setSelectedAnswer(savedResult.selectedAnswer);
-      setShowResult(mode === "study");
+      setShowResult(true); // Keep showing the result once it's available
     } else {
       setSelectedAnswer("");
       setShowResult(false);
     }
-  }, [currentQuestionIndex, quizResults, mode]);
+  }, [currentQuestionIndex, quizResults]);
 
   const handleAnswerSelect = (value: string) => {
     setSelectedAnswer(value);
@@ -56,7 +57,7 @@ const QuizPage = () => {
     updatedResults[currentQuestionIndex] = detailedResult;
 
     setQuizResults(updatedResults);
-    setShowResult(true);
+    setShowResult(true); // Persist the result
   };
 
   const handleNextQuestion = () => {
@@ -74,13 +75,13 @@ const QuizPage = () => {
   };
 
   const handleSubmitQuiz = () => {
-    QuizService.saveQuizResult(quizId, {
-      quizName: `Quiz ${quizId}`,
-      courseName: "Sample Course", // This should be dynamic based on your data
-      numCorrect: quizResults.filter(result => result.isCorrect).length,
-      totalQuestions: quizQuestions.length,
-      questions: quizResults,
-    });
+    // QuizService.saveQuizResult(quizId, {
+    //   quizName: `Quiz ${quizId}`,
+    //   courseName: "Sample Course", // This should be dynamic based on your data
+    //   numCorrect: quizResults.filter(result => result.isCorrect).length,
+    //   totalQuestions: quizQuestions.length,
+    //   questions: quizResults,
+    // });
 
     router.push(`/quiz/${quizId}/result`); // Navigate to results page after completing the quiz
   };
@@ -97,9 +98,9 @@ const QuizPage = () => {
           explanation: "No options available.",
         };
       }
-  
+
       const randomOption = question.options[Math.floor(Math.random() * question.options.length)];
-  
+
       if (!randomOption) {
         // If for some reason randomOption is still undefined
         return {
@@ -109,7 +110,7 @@ const QuizPage = () => {
           explanation: "No valid option selected.",
         };
       }
-  
+
       return {
         question: question,
         selectedAnswer: randomOption.text,
@@ -117,9 +118,9 @@ const QuizPage = () => {
         explanation: randomOption.explanation || "No explanation provided.",
       };
     });
-  
+
     setQuizResults(randomResults);
-  
+
     // Simulate submitting the quiz
     QuizService.saveQuizResult(quizId, {
       quizName: `Quiz ${quizId}`,
@@ -128,10 +129,9 @@ const QuizPage = () => {
       totalQuestions: randomResults.length,
       questions: randomResults,
     });
-  
+
     router.push(`/quiz/${quizId}/result`);
   };
-  
 
   const currentQuestion = quizQuestions[currentQuestionIndex];
 
