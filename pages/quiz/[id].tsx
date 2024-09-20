@@ -26,15 +26,16 @@ const QuizPage = () => {
   }, [quizQuestions, router]);
 
   useEffect(() => {
+    // Only set the initial state when navigating to the current question for the first time
     const savedResult = quizResults[currentQuestionIndex];
     if (savedResult) {
       setSelectedAnswer(savedResult.selectedAnswer);
-      setShowResult(mode === "study");
+      setShowResult(true); // Keep showing the result once it's available
     } else {
       setSelectedAnswer("");
       setShowResult(false);
     }
-  }, [currentQuestionIndex, quizResults, mode]);
+  }, [currentQuestionIndex, quizResults]);
 
   const handleAnswerSelect = (value: string) => {
     setSelectedAnswer(value);
@@ -56,12 +57,13 @@ const QuizPage = () => {
     updatedResults[currentQuestionIndex] = detailedResult;
 
     setQuizResults(updatedResults);
-    setShowResult(true);
+    setShowResult(true); // Persist the result
   };
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < quizQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setShowResult(false); // Reset the result for the next question
     } else {
       handleSubmitQuiz(); // Automatically submit when reaching the last question
     }
@@ -97,19 +99,9 @@ const QuizPage = () => {
           explanation: "No options available.",
         };
       }
-  
+
       const randomOption = question.options[Math.floor(Math.random() * question.options.length)];
-  
-      if (!randomOption) {
-        // If for some reason randomOption is still undefined
-        return {
-          question: question,
-          selectedAnswer: "",
-          isCorrect: false,
-          explanation: "No valid option selected.",
-        };
-      }
-  
+
       return {
         question: question,
         selectedAnswer: randomOption.text,
@@ -117,9 +109,9 @@ const QuizPage = () => {
         explanation: randomOption.explanation || "No explanation provided.",
       };
     });
-  
+
     setQuizResults(randomResults);
-  
+
     // Simulate submitting the quiz
     QuizService.saveQuizResult(quizId, {
       quizName: `Quiz ${quizId}`,
@@ -128,10 +120,9 @@ const QuizPage = () => {
       totalQuestions: randomResults.length,
       questions: randomResults,
     });
-  
+
     router.push(`/quiz/${quizId}/result`);
   };
-  
 
   const currentQuestion = quizQuestions[currentQuestionIndex];
 
@@ -148,6 +139,7 @@ const QuizPage = () => {
             selectedAnswer={selectedAnswer}
             showResult={showResult}
             onSelectAnswer={handleAnswerSelect}
+            isResultPage={false} // Pass false to ensure accordion is not shown during the quiz
           />
           <QuestionNavigation
             currentQuestionIndex={currentQuestionIndex}

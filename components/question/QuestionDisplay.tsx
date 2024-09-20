@@ -18,12 +18,13 @@ const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
   selectedAnswer = "",
   showResult = false,
   onSelectAnswer,
+  isResultPage = false,
 }) => {
   const isCorrectAnswer = selectedAnswer === question.options.find(option => option.isCorrect)?.text;
 
   return (
-    <Box m={2} borderWidth="1px" borderRadius="lg">
-      {showResult ? (
+    <Box m={2} p={2} borderWidth="1px" borderRadius="lg">
+      {showResult && isResultPage ? (
         <Accordion defaultIndex={[0]} allowMultiple>
           <AccordionItem>
             <AccordionButton>
@@ -35,7 +36,7 @@ const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
               />
               <AccordionIcon />
             </AccordionButton>
-            <AccordionPanel pb={4}>
+            <AccordionPanel pb={2}>
               {question.options.map((option, index) => (
                 <OptionItem
                   key={index}
@@ -56,7 +57,7 @@ const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
             isCorrectAnswer={isCorrectAnswer}
             showResult={showResult}
           />
-          <RadioGroup mt={4} value={selectedAnswer} onChange={onSelectAnswer}>
+          <RadioGroup mt={4} pb={4} value={selectedAnswer} onChange={onSelectAnswer}>
             <Stack direction="column" spacing={4}>
               {question.options.map((option, index) => (
                 <OptionItem

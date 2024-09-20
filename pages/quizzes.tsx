@@ -49,7 +49,7 @@ const Quizzes = () => {
         <TabList mb="1em">
           <Tab fontSize={["sm", "md"]}>Take a Quiz</Tab>
           <Tab fontSize={["sm", "md"]}>Quiz Results</Tab>
-          <Tab fontSize={["sm", "md"]}>Create Custom Test</Tab>
+          <Tab fontSize={["sm", "md"]}>Create Custom Quiz</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>

@@ -50,6 +50,7 @@ export interface QuestionDisplayProps {
   selectedAnswer?: string;    // The selected answer
   showResult?: boolean;       // Whether to show result
   onSelectAnswer?: (value: string) => void; // Function to handle answer selection
+  isResultPage?: boolean;        // Whether to show result
 }
 
 // Quiz Result Interface

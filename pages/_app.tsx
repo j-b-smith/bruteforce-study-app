@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Box display="flex" flexDirection="column" minHeight="100vh">
           <Navbar />
 
-          <Box as="main" flex="1" pt={[4, 6, 8]}>
+          <Box as="main" flex="1" pt={[4, 6, 8]} pb={[4, 6, 8]}>
             <Component {...pageProps} />
           </Box>
 

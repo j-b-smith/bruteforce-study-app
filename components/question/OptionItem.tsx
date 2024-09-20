@@ -16,14 +16,11 @@ const OptionItem: React.FC<OptionItemProps> = ({
       p={2}
       m={1}
       ml={8}
-      borderWidth="1px"
-      borderRadius="lg"
-      borderColor={isSelected ? (option.isCorrect ? "green.500" : "red.500") : "gray.200"}
-      bg={isSelected ? (option.isCorrect ? "green.50" : "red.50") : "white"}
+      bg={isSelected && showResult ? (option.isCorrect ? "green.50" : "red.50") : "white"}
       onClick={() => onSelectAnswer && onSelectAnswer(option.text)}
       cursor="pointer"
     >
-      <Radio value={option.text} fontSize={["sm", "md"]} isDisabled={showResult}>
+      <Radio value={option.text} fontSize={["sm", "md"]} isDisabled={showResult} isChecked={isSelected}>
         {option.text}
       </Radio>
       {showResult && (
