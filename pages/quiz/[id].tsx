@@ -63,6 +63,7 @@ const QuizPage = () => {
   const handleNextQuestion = () => {
     if (currentQuestionIndex < quizQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setShowResult(false); // Reset the result for the next question
     } else {
       handleSubmitQuiz(); // Automatically submit when reaching the last question
     }
@@ -75,13 +76,13 @@ const QuizPage = () => {
   };
 
   const handleSubmitQuiz = () => {
-    // QuizService.saveQuizResult(quizId, {
-    //   quizName: `Quiz ${quizId}`,
-    //   courseName: "Sample Course", // This should be dynamic based on your data
-    //   numCorrect: quizResults.filter(result => result.isCorrect).length,
-    //   totalQuestions: quizQuestions.length,
-    //   questions: quizResults,
-    // });
+    QuizService.saveQuizResult(quizId, {
+      quizName: `Quiz ${quizId}`,
+      courseName: "Sample Course", // This should be dynamic based on your data
+      numCorrect: quizResults.filter(result => result.isCorrect).length,
+      totalQuestions: quizQuestions.length,
+      questions: quizResults,
+    });
 
     router.push(`/quiz/${quizId}/result`); // Navigate to results page after completing the quiz
   };
@@ -100,16 +101,6 @@ const QuizPage = () => {
       }
 
       const randomOption = question.options[Math.floor(Math.random() * question.options.length)];
-
-      if (!randomOption) {
-        // If for some reason randomOption is still undefined
-        return {
-          question: question,
-          selectedAnswer: "",
-          isCorrect: false,
-          explanation: "No valid option selected.",
-        };
-      }
 
       return {
         question: question,
@@ -148,6 +139,7 @@ const QuizPage = () => {
             selectedAnswer={selectedAnswer}
             showResult={showResult}
             onSelectAnswer={handleAnswerSelect}
+            isResultPage={false} // Pass false to ensure accordion is not shown during the quiz
           />
           <QuestionNavigation
             currentQuestionIndex={currentQuestionIndex}
