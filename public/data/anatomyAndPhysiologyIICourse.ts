@@ -805,11 +805,6 @@ const anatomyAndPhysiologyII: Course = {
         },
         {
           categoryName: "Endocrine System",
-          text: "What hormone is produced by the pineal gland?",
-          options: [],
-        },
-        {
-          categoryName: "Endocrine System",
           text: "What is the function of melatonin?",
           options: [
             {
@@ -920,11 +915,6 @@ const anatomyAndPhysiologyII: Course = {
               isCorrect: false,
             },
           ],
-        },
-        {
-          categoryName: "Endocrine System",
-          text: "What hormone is produced by the testes?",
-          options: [],
         },
         {
           categoryName: "Endocrine System",
