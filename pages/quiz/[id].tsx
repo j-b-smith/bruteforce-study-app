@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { Box, Heading, Button } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import QuizService from "../../services/QuizService";
 import { DetailedQuestionResult } from "../../types/quiz";
 import QuestionDisplay from "../../components/question/QuestionDisplay";
@@ -12,7 +12,9 @@ const QuizPage = () => {
   const { id, mode: queryMode } = router.query;
   const quizId = parseInt(id as string, 10);
   const mode = queryMode as "prep" | "study";
-  const quizQuestions = QuizService.getQuizById(quizId) || [];
+
+  // Memoize quizQuestions to avoid recalculating on every render
+  const quizQuestions = useMemo(() => QuizService.getQuizById(quizId) || [], [quizId]);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
@@ -21,16 +23,15 @@ const QuizPage = () => {
 
   useEffect(() => {
     if (!quizQuestions.length) {
-      router.push("/quizzes"); // Redirect if quiz is not found
+      router.push("/quizzes");
     }
   }, [quizQuestions, router]);
 
   useEffect(() => {
-    // Only set the initial state when navigating to the current question for the first time
     const savedResult = quizResults[currentQuestionIndex];
     if (savedResult) {
       setSelectedAnswer(savedResult.selectedAnswer);
-      setShowResult(true); // Keep showing the result once it's available
+      setShowResult(true);
     } else {
       setSelectedAnswer("");
       setShowResult(false);
@@ -43,7 +44,7 @@ const QuizPage = () => {
 
   const handleSubmitAnswer = () => {
     const currentQuestion = quizQuestions[currentQuestionIndex];
-    const selectedOption = currentQuestion.options.find(option => option.text === selectedAnswer);
+    const selectedOption = currentQuestion.options.find((option) => option.text === selectedAnswer);
     const isCorrect = selectedOption?.isCorrect ?? false;
 
     const detailedResult: DetailedQuestionResult = {
@@ -57,15 +58,15 @@ const QuizPage = () => {
     updatedResults[currentQuestionIndex] = detailedResult;
 
     setQuizResults(updatedResults);
-    setShowResult(true); // Persist the result
+    setShowResult(true);
   };
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < quizQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setShowResult(false); // Reset the result for the next question
+      setShowResult(false);
     } else {
-      handleSubmitQuiz(); // Automatically submit when reaching the last question
+      handleSubmitQuiz();
     }
   };
 
@@ -78,20 +79,18 @@ const QuizPage = () => {
   const handleSubmitQuiz = () => {
     QuizService.saveQuizResult(quizId, {
       quizName: `Quiz ${quizId}`,
-      courseName: "Sample Course", // This should be dynamic based on your data
-      numCorrect: quizResults.filter(result => result.isCorrect).length,
+      courseName: "Sample Course",
+      numCorrect: quizResults.filter((result) => result.isCorrect).length,
       totalQuestions: quizQuestions.length,
       questions: quizResults,
     });
 
-    router.push(`/quiz/${quizId}/result`); // Navigate to results page after completing the quiz
+    router.push(`/quiz/${quizId}/result`);
   };
 
-  // Function to answer all questions randomly and submit the quiz
   const handleRandomAnswerAndSubmit = () => {
     const randomResults: DetailedQuestionResult[] = quizQuestions.map((question) => {
       if (question.options.length === 0) {
-        // Handle case where there are no options
         return {
           question: question,
           selectedAnswer: "",
@@ -112,11 +111,10 @@ const QuizPage = () => {
 
     setQuizResults(randomResults);
 
-    // Simulate submitting the quiz
     QuizService.saveQuizResult(quizId, {
       quizName: `Quiz ${quizId}`,
-      courseName: "Sample Course", // This should be dynamic based on your data
-      numCorrect: randomResults.filter(result => result.isCorrect).length,
+      courseName: "Sample Course",
+      numCorrect: randomResults.filter((result) => result.isCorrect).length,
       totalQuestions: randomResults.length,
       questions: randomResults,
     });
@@ -135,11 +133,11 @@ const QuizPage = () => {
         <Box p={[2, 4]} borderWidth="1px" borderRadius="lg">
           <QuestionDisplay
             question={currentQuestion}
-            questionIndex={currentQuestionIndex} // Pass the question index to the QuestionDisplay component
+            questionIndex={currentQuestionIndex}
             selectedAnswer={selectedAnswer}
             showResult={showResult}
             onSelectAnswer={handleAnswerSelect}
-            isResultPage={false} // Pass false to ensure accordion is not shown during the quiz
+            isResultPage={false}
           />
           <QuestionNavigation
             currentQuestionIndex={currentQuestionIndex}
@@ -155,7 +153,6 @@ const QuizPage = () => {
         </Box>
       )}
 
-      {/* Button for testing - answers all questions randomly */}
       <Button mt={8} colorScheme="blue" onClick={handleRandomAnswerAndSubmit}>
         Answer All Randomly and Submit
       </Button>
