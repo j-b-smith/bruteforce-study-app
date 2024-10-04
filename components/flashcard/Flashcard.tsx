@@ -1,5 +1,5 @@
-import { Box, Text } from "@chakra-ui/react";
-import React from "react";
+import { Box, Text, useColorModeValue } from "@chakra-ui/react";
+import React, { useState, useEffect, useRef } from "react";
 
 interface FlashcardProps {
   front: string;
@@ -8,59 +8,71 @@ interface FlashcardProps {
   onFlip: () => void;
 }
 
-// Helper function to format the back content
-const formatBackContent = (back: string) => {
-  const bulletSymbol = "•";
-
-  // Split by the bullet point, keeping the bullet point with the text
-  const backContent = back.split(bulletSymbol).map((item, index) => (
-    <React.Fragment key={index}>
-      {index === 0 ? null : <br />} {/* Add line break before all but the first bullet */}
-      {index > 0 && bulletSymbol} {/* Add bullet symbol back except for the first item */}
-      {item.trim()}
-    </React.Fragment>
-  ));
-
-  return backContent;
-};
-
-// Helper function to check if back content contains bullets
-const containsBullets = (back: string) => back.includes("•");
-
 const Flashcard: React.FC<FlashcardProps> = ({ front, back, isFlipped, onFlip }) => {
-  const cardStyles = {
-    transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-    transition: 'transform 0.3s ease',
-    perspective: '1000px'
-  };
+  const cardBg = useColorModeValue("white", "gray.700");
+  const textColor = useColorModeValue("gray.800", "white");
+  const borderColor = useColorModeValue("gray.200", "gray.600");
 
-  const textAlign = isFlipped && containsBullets(back) ? "left" : "center"; // Front is always centered, back adjusts if bullets
-  const paddingLeft = isFlipped && containsBullets(back) ? "1rem" : "0"; // Add left padding only if back content contains bullets
+  const textRef = useRef<HTMLDivElement>(null); // Reference to the text container
+  const [textSize, setTextSize] = useState("lg"); // State to dynamically adjust text size
+
+  useEffect(() => {
+    // Dynamically reduce font size if the text is overflowing
+    const adjustFontSize = () => {
+      if (textRef.current) {
+        const { scrollHeight, clientHeight } = textRef.current;
+        if (scrollHeight > clientHeight) {
+          setTextSize("md"); // Reduce size if text overflows
+        } else {
+          setTextSize("lg"); // Reset to default size
+        }
+      }
+    };
+
+    adjustFontSize(); // Check initially
+    window.addEventListener("resize", adjustFontSize); // Re-check on window resize
+
+    return () => {
+      window.removeEventListener("resize", adjustFontSize); // Cleanup on unmount
+    };
+  }, [isFlipped]); // Re-run when card is flipped
 
   return (
     <Box
-      p={6}
+      onClick={onFlip}
+      p={[6, 8]}
       borderWidth="1px"
       borderRadius="lg"
       boxShadow="lg"
-      textAlign={textAlign}
-      paddingLeft={paddingLeft}
-      maxW={["17.5rem", "18.75rem", "25rem"]}
-      minW={["15rem", "18.75rem", "25rem"]}
-      maxH={["20rem", "25rem", "25rem"]}
-      minH={["12rem", "25rem", "25rem"]}
+      textAlign="center"
+      backgroundColor={cardBg}
+      color={textColor}
+      borderColor={borderColor}
+      w={["80vw", "60vw", "400px"]} // Fixed width for responsiveness
+      h={["40vh", "50vh", "250px"]} // Fixed height for responsiveness
+      maxW="400px"
+      maxH="250px"
       mx="auto"
       display="flex"
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
       cursor="pointer"
-      onClick={onFlip}
-      backgroundColor="white"
-      style={cardStyles} // Apply flipping styles
+      transition="all 0.2s ease-in-out"
+      _hover={{ boxShadow: "xl" }}
     >
-      <Text fontSize={["sm", "md", "lg"]} noOfLines={6} lineHeight="1.5" style={{ transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' }}>
-        {isFlipped ? formatBackContent(back) : front}
+      <Text
+        ref={textRef} // Attach ref to track overflow
+        fontSize={textSize} // Dynamically adjust font size
+        fontWeight="medium"
+        lineHeight="1.5"
+        overflow="hidden"
+        whiteSpace="normal"
+        overflowWrap="break-word"
+        textOverflow="ellipsis"
+        noOfLines={6} // Limit number of lines
+      >
+        {isFlipped ? back : front}
       </Text>
     </Box>
   );

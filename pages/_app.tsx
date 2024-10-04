@@ -1,9 +1,8 @@
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
-import Navbar from "../components/NavBar";
+import Navbar from "../components/navbar/NavBar";
 import Footer from "../components/Footer";
 import { CourseProvider } from "../contexts/CourseProvider";
-
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
