@@ -1,5 +1,5 @@
 
-# Bruteforce Study App - https://joseph-smith.vercel.app/
+# Bruteforce Study App
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). The app is designed to help users (specifically my girlfriend) prepare for quizzes and exams through both flashcard and multiple-choice quiz modes. It's optimized for mobile and desktop viewing and leverages  Chakra UI for design.
 
@@ -38,4 +38,4 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Deployment
 
-This project is deployed with Vercel at https://joseph-smith.vercel.app/
+This project is deployed with Vercel
