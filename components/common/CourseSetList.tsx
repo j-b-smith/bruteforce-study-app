@@ -18,15 +18,16 @@ import { Course, Category } from "../../types";
 interface CourseSetListProps {
   courses: Course[];
   actionLabel: string;
+  tagLabel: string;
   onAction: (setItems: Category[]) => void;
 }
 
 const CourseSetList: React.FC<CourseSetListProps> = ({
   courses,
   actionLabel,
+  tagLabel,
   onAction,
 }) => {
-  // Color mode variables
   const expandedBgColor = useColorModeValue("purple.100", "purple.900");
   const panelBgColor = useColorModeValue("gray.50", "gray.800");
 
@@ -36,7 +37,7 @@ const CourseSetList: React.FC<CourseSetListProps> = ({
         <AccordionItem key={course.name}>
           <h2>
             <AccordionButton
-              _expanded={{ bg: expandedBgColor }} // Expanded background color
+              _expanded={{ bg: expandedBgColor }}
               fontSize={["sm", "md"]}
               py={4}
             >
@@ -81,11 +82,11 @@ const CourseSetList: React.FC<CourseSetListProps> = ({
                       size="lg"
                       mb={[4, 0]}
                       mr={[0, 12]}
-                      width={["full", "auto"]} // Full width on mobile, auto on desktop
+                      width={["full", "auto"]}
                       textAlign="center"
                       py={2}
                     >
-                      {category.flashcards?.length || 0} {actionLabel}
+                      {category.flashcards?.length || 0} {tagLabel}
                     </Tag>
                   </Flex>
 

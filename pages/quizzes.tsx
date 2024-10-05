@@ -3,7 +3,7 @@ import { useCourseContext } from "../contexts/CourseProvider";
 import { useRouter } from "next/router";
 import QuizService from "../services/QuizService";
 import TestGenerator from "../services/TestGenerator";
-import CourseSetList from "../components/common/CourseSetList"; // Use CourseSetList component
+import CourseSetList from "../components/common/CourseSetList";
 import { Category } from "../types/quiz";
 
 const Quizzes = () => {
@@ -66,9 +66,10 @@ const Quizzes = () => {
 
       {/* Use CourseSetList to render quizzes */}
       <CourseSetList
-        courses={courses}                // Pass courses from context
-        actionLabel="Take Quiz"           // Customize the action label for quizzes
-        onAction={handleSelectQuizSet}    // Handle quiz set selection
+        courses={courses}
+        actionLabel="Take Quiz"       
+        tagLabel="Questions"
+        onAction={handleSelectQuizSet}
       />
     </Box>
   );

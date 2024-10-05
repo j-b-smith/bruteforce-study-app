@@ -42,7 +42,8 @@ const Flashcards = () => {
       {!isStudying ? (
         <CourseSetList
           courses={courses}                
-          actionLabel="Study"              
+          actionLabel="Study"
+          tagLabel="Flashcards"              
           onAction={handleSelectFlashcardSet} 
         />
       ) : (
