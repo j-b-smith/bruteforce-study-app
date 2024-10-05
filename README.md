@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Bruteforce Study App
 
-First, run the development server:
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). The app is designed to help users (specifically my girlfriend) prepare for quizzes and exams through both flashcard and multiple-choice quiz modes. It's optimized for mobile and desktop viewing and leverages  Chakra UI for design.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Multiple-Choice Quiz Mode**: Users can take pre-built or custom quizzes, filter questions by category, and receive instant feedback.
+- **Flashcard Mode**: Users can study key concepts through a flashcard interface.
+- **Quiz Filtering**: Quizzes can be filtered by category and user-created custom quizzes.
+- **Randomized Questions & Options**: Both quiz questions and answer options are randomized for each attempt.
+- **Mobile-Friendly**: The app is fully responsive and optimized for mobile use.
+- **Real-time Updates**: Uses Chakra UI for components and Firebase for real-time authentication and data storage.
+- **State Management**: React Context API is used to handle global state across the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## File Structure
 
-## Learn More
+- `pages/`: Main routing and rendering of pages (e.g., Quizzes, Flashcards, Settings).
+- `components/`: Reusable React components, including buttons, modals, and form elements.
+- `context/`: Contains React Context API for managing global state, including authentication and quiz data.
+- `services/`: Manages interaction with Firebase, authentication, and quiz data retrieval.
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Next.js**: Used for server-side rendering and routing.
+- **TypeScript**: Ensures type safety throughout the application.
+- **Chakra UI**: Provides responsive, customizable components for UI design.
+- **Firebase**: Authentication and real-time database integration.
+- **React Context API**: Manages global state like quiz progress and user sessions.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+- **`dev`**: Runs the development server.
+- **`build`**: Builds the application for production.
+- **`start`**: Starts the Next.js server.
+- **`lint`**: Runs ESLint checks.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is deployed with Vercel at https://joseph-smith.vercel.app/
