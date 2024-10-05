@@ -4,19 +4,28 @@ const Footer = () => {
   return (
     <Box
       as="footer"
-      bg="purple.600"
+      bgGradient="linear(to-r, purple.600, purple.700)"
       color="white"
-      py={2}
-      px={4}
+      py={4}
+      px={8}
       position="fixed"
       bottom={0}
       left={0}
       width="100%"
       textAlign="center"
       fontSize="sm"
-      boxShadow="0 -1px 3px rgba(0, 0, 0, 0.1)"
+      boxShadow="0 -2px 6px rgba(0, 0, 0, 0.2)"
+      zIndex="1000"
     >
-      <Text>&copy; {new Date().getFullYear()} BruteforceStudy</Text>
+      <Text
+        fontWeight="medium"
+        letterSpacing="wide"
+        textShadow="0px 2px 4px rgba(0, 0, 0, 0.2)"
+        transition="color 0.3s ease"
+        _hover={{ color: "purple.300" }}
+      >
+        &copy; {new Date().getFullYear()} BruteforceStudy
+      </Text>
     </Box>
   );
 };

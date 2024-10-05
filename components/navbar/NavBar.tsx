@@ -6,19 +6,20 @@ import {
   useDisclosure,
   Collapse,
   Spacer,
-  Text,
+  VStack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import MobileMenu from "./mobile/MobileMenu";
-import Link from "next/link";
+import { AtSignIcon, InfoIcon, SettingsIcon } from "@chakra-ui/icons";
 import { memo } from "react";
+import NavBarLink from "./NavBarLink";
+import MobileNavBarLink from "./MobileNavBarLink";
 
 const Navbar: React.FC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box
-      bgGradient="linear(to-r, purple.600, purple.700)" // Gradient for depth
+      bgGradient="linear(to-r, purple.600, purple.700)"
       px={{ base: 4, md: 8 }}
       py={4}
       position="fixed"
@@ -33,9 +34,9 @@ const Navbar: React.FC = memo(() => {
         <Box
           color="white"
           fontWeight="extrabold"
-          fontSize={{ base: "2xl", md: "3xl" }} // Larger font for more emphasis
-          textShadow="0px 4px 6px rgba(0, 0, 0, 0.2)" // Subtle shadow for pop
-          letterSpacing="wide" // Improved spacing for a cleaner look
+          fontSize={{ base: "2xl", md: "3xl" }}
+          textShadow="0px 4px 6px rgba(0, 0, 0, 0.2)"
+          letterSpacing="wide"
           _hover={{
             color: "purple.300",
             textDecoration: "underline",
@@ -61,7 +62,7 @@ const Navbar: React.FC = memo(() => {
             bg: "purple.500",
             transform: "scale(1.15)",
             border: "2px solid white",
-          }} // Enhanced hover effect
+          }}
           transition="all 0.2s ease-in-out"
         />
 
@@ -72,59 +73,30 @@ const Navbar: React.FC = memo(() => {
           display={{ base: "none", md: "flex" }}
           color="white"
         >
-          <Link href="/" passHref>
-            <Text
-              as="a"
-              fontWeight="medium"
-              _hover={{ color: "purple.300", transform: "scale(1.05)" }}
-              transition="all 0.2s ease-in-out"
-              cursor="pointer"
-            >
-              Home
-            </Text>
-          </Link>
-
-          <Link href="/quizzes" passHref>
-            <Text
-              as="a"
-              fontWeight="medium"
-              _hover={{ color: "purple.300", transform: "scale(1.05)" }}
-              transition="all 0.2s ease-in-out"
-              cursor="pointer"
-            >
-              Quizzes
-            </Text>
-          </Link>
-
-          <Link href="/flashcards" passHref>
-            <Text
-              as="a"
-              fontWeight="medium"
-              _hover={{ color: "purple.300", transform: "scale(1.05)" }}
-              transition="all 0.2s ease-in-out"
-              cursor="pointer"
-            >
-              Flashcards
-            </Text>
-          </Link>
-
-          <Link href="/settings" passHref>
-            <Text
-              as="a"
-              fontWeight="medium"
-              _hover={{ color: "purple.300", transform: "scale(1.05)" }}
-              transition="all 0.2s ease-in-out"
-              cursor="pointer"
-            >
-              Settings
-            </Text>
-          </Link>
+          <NavBarLink href="/" label="Home" />
+          <NavBarLink href="/quizzes" label="Quizzes" />
+          <NavBarLink href="/flashcards" label="Flashcards" />
+          <NavBarLink href="/settings" label="Settings" />
         </HStack>
       </Flex>
 
       {/* Mobile Menu */}
       <Collapse in={isOpen} animateOpacity>
-        <MobileMenu onClose={onClose} />
+        <VStack
+          as="nav"
+          spacing={4}
+          mt={2}
+          bg="purple.500"
+          p={4}
+          borderRadius="md"
+          display={{ md: "none" }}
+          onClick={onClose}
+        >
+          <MobileNavBarLink href="/" label="Home" icon={AtSignIcon} onClose={onClose}/>
+          <MobileNavBarLink href="/quizzes" label="Quizzes" icon={InfoIcon} onClose={onClose}/>
+          <MobileNavBarLink href="/flashcards" label="Flashcards" icon={InfoIcon} onClose={onClose}/>
+          <MobileNavBarLink href="/settings" label="Settings" icon={SettingsIcon} onClose={onClose}/>
+        </VStack>
       </Collapse>
     </Box>
   );
