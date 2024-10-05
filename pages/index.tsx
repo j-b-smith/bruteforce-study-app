@@ -5,6 +5,7 @@ export default function Home() {
   const router = useRouter();
 
   return (
+    <>
     <Box
       height="100vh"
       display="flex"
@@ -34,7 +35,7 @@ export default function Home() {
             fontWeight="bold"
             color="white"
           >
-            Study harder, not smarter.
+            Study Harder.
           </Heading>
           <Text
             fontSize={{ base: "md", md: "lg", lg: "xl" }}
@@ -66,5 +67,6 @@ export default function Home() {
         </VStack>
       </Box>
     </Box>
+    </>
   );
 }
