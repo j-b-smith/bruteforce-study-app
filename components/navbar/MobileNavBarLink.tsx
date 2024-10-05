@@ -1,11 +1,11 @@
-import { Box, Icon, Text, ComponentWithAs, IconProps } from "@chakra-ui/react";
+import { Box, Icon, Text, IconProps } from "@chakra-ui/react";
 import Link from "next/link";
-import { memo, ReactNode } from "react";
+import { memo } from "react";
 
 interface MobileNavBarLinkProps {
   href: string;
   label: string;
-  icon: ComponentWithAs<"svg", IconProps>;
+  icon: React.ElementType<IconProps>; // Update type to correctly accept icon components
   onClose: () => void;
 }
 
@@ -23,7 +23,6 @@ const MobileNavBarLink: React.FC<MobileNavBarLinkProps> = memo(
           _hover={{ bg: "purple.600" }}
           onClick={onClose}
         >
-            
           <Icon as={icon} />
           <Text ml={3}>{label}</Text>
         </Box>
