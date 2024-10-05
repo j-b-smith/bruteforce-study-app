@@ -76,7 +76,6 @@ const Navbar: React.FC = memo(() => {
           <NavBarLink href="/" label="Home" />
           <NavBarLink href="/quizzes" label="Quizzes" />
           <NavBarLink href="/flashcards" label="Flashcards" />
-          <NavBarLink href="/settings" label="Settings" />
         </HStack>
       </Flex>
 
@@ -95,7 +94,6 @@ const Navbar: React.FC = memo(() => {
           <MobileNavBarLink href="/" label="Home" icon={AtSignIcon} onClose={onClose}/>
           <MobileNavBarLink href="/quizzes" label="Quizzes" icon={InfoIcon} onClose={onClose}/>
           <MobileNavBarLink href="/flashcards" label="Flashcards" icon={InfoIcon} onClose={onClose}/>
-          <MobileNavBarLink href="/settings" label="Settings" icon={SettingsIcon} onClose={onClose}/>
         </VStack>
       </Collapse>
     </Box>
