@@ -5569,8 +5569,532 @@ const anatomyAndPhysiologyII: Course = {
       name: "APY II Test 3",
       flashcards: [],
       questions: [
-      ]
+        {
+          categoryName: "APY II Test 3",
+          text: "What is the primary function of the kidneys?",
+          options: [
+            {
+              text: "Filter blood and form urine",
+              explanation: "Correct. The kidneys filter the blood to remove wastes and form urine.",
+              isCorrect: true
+            },
+            {
+              text: "Transport urine to the bladder",
+              explanation: "Incorrect. The ureters transport urine from the kidneys to the bladder.",
+              isCorrect: false
+            },
+            {
+              text: "Store urine",
+              explanation: "Incorrect. The urinary bladder stores urine until it is expelled.",
+              isCorrect: false
+            },
+            {
+              text: "Regulate blood glucose levels",
+              explanation: "Incorrect. Blood glucose levels are primarily regulated by insulin and glucagon.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "What structure in the kidney filters blood?",
+          options: [
+            {
+              text: "Glomerulus",
+              explanation: "Correct. The glomerulus is a capillary network that filters blood in the kidneys.",
+              isCorrect: true
+            },
+            {
+              text: "Ureter",
+              explanation: "Incorrect. The ureter transports urine from the kidney to the bladder.",
+              isCorrect: false
+            },
+            {
+              text: "Renal pelvis",
+              explanation: "Incorrect. The renal pelvis collects urine and directs it into the ureter.",
+              isCorrect: false
+            },
+            {
+              text: "Nephron loop",
+              explanation: "Incorrect. The nephron loop is involved in urine concentration but does not filter blood.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "What hormone is responsible for increasing water reabsorption in the kidneys?",
+          options: [
+            {
+              text: "ADH (Antidiuretic Hormone)",
+              explanation: "Correct. ADH increases the permeability of renal tubules to water, promoting water reabsorption.",
+              isCorrect: true
+            },
+            {
+              text: "Aldosterone",
+              explanation: "Incorrect. Aldosterone primarily increases sodium reabsorption, which indirectly increases water retention.",
+              isCorrect: false
+            },
+            {
+              text: "Renin",
+              explanation: "Incorrect. Renin is part of the renin-angiotensin system and primarily helps regulate blood pressure.",
+              isCorrect: false
+            },
+            {
+              text: "ANP (Atrial Natriuretic Peptide)",
+              explanation: "Incorrect. ANP decreases water reabsorption by inhibiting aldosterone.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "How is water balance primarily maintained in the body?",
+          options: [
+            {
+              text: "Through regulation of water intake and output",
+              explanation: "Correct. Water balance is controlled by thirst and the regulation of urine production by the kidneys.",
+              isCorrect: true
+            },
+            {
+              text: "By adjusting oxygen intake",
+              explanation: "Incorrect. Oxygen intake is not related to water balance.",
+              isCorrect: false
+            },
+            {
+              text: "Through calcium reabsorption",
+              explanation: "Incorrect. Calcium reabsorption is regulated by parathyroid hormone, not directly involved in water balance.",
+              isCorrect: false
+            },
+            {
+              text: "By regulating body temperature",
+              explanation: "Incorrect. Body temperature is regulated separately, primarily through thermoregulation mechanisms.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "What hormone triggers ovulation in females?",
+          options: [
+            {
+              text: "LH (Luteinizing Hormone)",
+              explanation: "Correct. LH surge triggers ovulation, releasing a secondary oocyte from the follicle.",
+              isCorrect: true
+            },
+            {
+              text: "FSH (Follicle-Stimulating Hormone)",
+              explanation: "Incorrect. FSH primarily stimulates follicle development but does not trigger ovulation.",
+              isCorrect: false
+            },
+            {
+              text: "Estrogen",
+              explanation: "Incorrect. Estrogen plays a role in thickening the endometrium but does not directly trigger ovulation.",
+              isCorrect: false
+            },
+            {
+              text: "Progesterone",
+              explanation: "Incorrect. Progesterone prepares the uterus for pregnancy but is not involved in ovulation.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "What is the function of the testes in the male reproductive system?",
+          options: [
+            {
+              text: "Produce sperm cells and secrete testosterone",
+              explanation: "Correct. The testes are responsible for spermatogenesis and testosterone secretion.",
+              isCorrect: true
+            },
+            {
+              text: "Store sperm cells",
+              explanation: "Incorrect. The epididymides store and mature sperm cells, not the testes.",
+              isCorrect: false
+            },
+            {
+              text: "Transport sperm cells to the outside",
+              explanation: "Incorrect. The vas deferens and urethra transport sperm cells, not the testes.",
+              isCorrect: false
+            },
+            {
+              text: "Secrete seminal fluid",
+              explanation: "Incorrect. Seminal fluid is produced by accessory glands like the seminal vesicles, not the testes.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "What is the role of the juxtaglomerular apparatus in kidney function?",
+          options: [
+            {
+              text: "Regulates blood pressure through renin secretion",
+              explanation: "Correct. The juxtaglomerular apparatus secretes renin, which helps regulate blood pressure.",
+              isCorrect: true
+            },
+            {
+              text: "Filters blood to form urine",
+              explanation: "Incorrect. Blood filtration occurs in the glomerulus, not the juxtaglomerular apparatus.",
+              isCorrect: false
+            },
+            {
+              text: "Increases water reabsorption in the kidneys",
+              explanation: "Incorrect. Water reabsorption is regulated by ADH and aldosterone, not the juxtaglomerular apparatus.",
+              isCorrect: false
+            },
+            {
+              text: "Produces erythropoietin",
+              explanation: "Incorrect. Erythropoietin is produced by the kidneys, but not specifically by the juxtaglomerular apparatus.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "What process leads to the formation of sperm cells?",
+          options: [
+            {
+              text: "Spermatogenesis",
+              explanation: "Correct. Spermatogenesis is the process of sperm cell formation that occurs in the seminiferous tubules.",
+              isCorrect: true
+            },
+            {
+              text: "Oogenesis",
+              explanation: "Incorrect. Oogenesis is the process of egg cell formation in females.",
+              isCorrect: false
+            },
+            {
+              text: "Meiosis I",
+              explanation: "Incorrect. Meiosis I is part of spermatogenesis but does not describe the entire process.",
+              isCorrect: false
+            },
+            {
+              text: "Ovulation",
+              explanation: "Incorrect. Ovulation refers to the release of an egg from the ovary in females.",
+              isCorrect: false
+            }
+          ]
+        },{
+          categoryName: "APY II Test 3",
+          text: "What is the role of the renal corpuscle in urine formation?",
+          options: [
+            {
+              text: "Filters blood in the kidneys",
+              explanation: "Correct. The renal corpuscle, consisting of the glomerulus and glomerular capsule, filters blood as the first step in urine formation.",
+              isCorrect: true
+            },
+            {
+              text: "Reabsorbs water and sodium",
+              explanation: "Incorrect. Water and sodium reabsorption occur primarily in the renal tubules, not the renal corpuscle.",
+              isCorrect: false
+            },
+            {
+              text: "Produces hormones",
+              explanation: "Incorrect. The renal corpuscle is involved in filtration, not hormone production.",
+              isCorrect: false
+            },
+            {
+              text: "Stores urine",
+              explanation: "Incorrect. The urinary bladder stores urine, not the renal corpuscle.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "What hormone is responsible for increasing sodium reabsorption in the kidneys?",
+          options: [
+            {
+              text: "Aldosterone",
+              explanation: "Correct. Aldosterone increases sodium reabsorption in the distal tubules and collecting ducts.",
+              isCorrect: true
+            },
+            {
+              text: "ADH",
+              explanation: "Incorrect. ADH increases water reabsorption, not sodium reabsorption.",
+              isCorrect: false
+            },
+            {
+              text: "Renin",
+              explanation: "Incorrect. Renin regulates blood pressure but does not directly affect sodium reabsorption.",
+              isCorrect: false
+            },
+            {
+              text: "ANP",
+              explanation: "Incorrect. Atrial natriuretic peptide (ANP) reduces sodium reabsorption, not increases it.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "Which hormone regulates water balance by increasing the permeability of the collecting ducts in the kidneys?",
+          options: [
+            {
+              text: "ADH (Antidiuretic Hormone)",
+              explanation: "Correct. ADH increases the permeability of the collecting ducts to water, allowing more water to be reabsorbed.",
+              isCorrect: true
+            },
+            {
+              text: "Aldosterone",
+              explanation: "Incorrect. Aldosterone primarily regulates sodium and potassium, not water permeability.",
+              isCorrect: false
+            },
+            {
+              text: "Renin",
+              explanation: "Incorrect. Renin is involved in blood pressure regulation, not direct water reabsorption.",
+              isCorrect: false
+            },
+            {
+              text: "Cortisol",
+              explanation: "Incorrect. Cortisol is a stress hormone and does not regulate water balance directly.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "What are the primary methods of water intake in the human body?",
+          options: [
+            {
+              text: "Drinking fluids, eating moist foods, and metabolic water production",
+              explanation: "Correct. Water is gained through drinking fluids, eating food with water content, and metabolic water produced during nutrient oxidation.",
+              isCorrect: true
+            },
+            {
+              text: "Absorbing water from the environment",
+              explanation: "Incorrect. Water intake is internal, primarily through drinking and food consumption.",
+              isCorrect: false
+            },
+            {
+              text: "Respiratory absorption",
+              explanation: "Incorrect. Water is not absorbed through respiration; rather, water is lost through respiration.",
+              isCorrect: false
+            },
+            {
+              text: "Direct absorption through the skin",
+              explanation: "Incorrect. Humans do not absorb significant amounts of water through the skin.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "What are the two types of cells produced in the first meiotic division during spermatogenesis?",
+          options: [
+            {
+              text: "Secondary spermatocytes",
+              explanation: "Correct. The first meiotic division produces secondary spermatocytes, which are haploid cells.",
+              isCorrect: true
+            },
+            {
+              text: "Spermatids",
+              explanation: "Incorrect. Spermatids are produced after the second meiotic division, not the first.",
+              isCorrect: false
+            },
+            {
+              text: "Spermatozoa",
+              explanation: "Incorrect. Spermatozoa are mature sperm cells that form after spermiogenesis.",
+              isCorrect: false
+            },
+            {
+              text: "Primary spermatocytes",
+              explanation: "Incorrect. Primary spermatocytes undergo meiosis I to form secondary spermatocytes.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "What is the role of estrogen in the female reproductive system?",
+          options: [
+            {
+              text: "Stimulates the growth of reproductive organs and secondary sex characteristics",
+              explanation: "Correct. Estrogen is crucial for the development and maintenance of reproductive organs and secondary sex characteristics.",
+              isCorrect: true
+            },
+            {
+              text: "Stimulates ovulation",
+              explanation: "Incorrect. Ovulation is triggered by luteinizing hormone (LH), not estrogen.",
+              isCorrect: false
+            },
+            {
+              text: "Stimulates milk production",
+              explanation: "Incorrect. Milk production is stimulated by prolactin, not estrogen.",
+              isCorrect: false
+            },
+            {
+              text: "Maintains pregnancy",
+              explanation: "Incorrect. Progesterone is the hormone responsible for maintaining pregnancy.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "What process involves the release of a mature oocyte from the ovary?",
+          options: [
+            {
+              text: "Ovulation",
+              explanation: "Correct. Ovulation refers to the release of a secondary oocyte from a mature follicle.",
+              isCorrect: true
+            },
+            {
+              text: "Spermatogenesis",
+              explanation: "Incorrect. Spermatogenesis is the process of sperm cell production in males.",
+              isCorrect: false
+            },
+            {
+              text: "Meiosis I",
+              explanation: "Incorrect. Meiosis I is part of oocyte development but does not refer to the release of the egg.",
+              isCorrect: false
+            },
+            {
+              text: "Menstruation",
+              explanation: "Incorrect. Menstruation refers to the shedding of the uterine lining, not the release of the egg.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "How does the bicarbonate buffer system help regulate pH in the body?",
+          options: [
+            {
+              text: "By converting strong acids to weak acids and strong bases to weak bases",
+              explanation: "Correct. The bicarbonate buffer system helps maintain pH balance by converting strong acids and bases into weaker forms.",
+              isCorrect: true
+            },
+            {
+              text: "By increasing the release of hydrogen ions",
+              explanation: "Incorrect. The bicarbonate buffer system works to neutralize hydrogen ions, not release them.",
+              isCorrect: false
+            },
+            {
+              text: "By absorbing water",
+              explanation: "Incorrect. The bicarbonate buffer system regulates pH, not water absorption.",
+              isCorrect: false
+            },
+            {
+              text: "By increasing oxygen levels in the blood",
+              explanation: "Incorrect. Oxygen levels are regulated by respiration, not the bicarbonate buffer system.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "What organ is responsible for the excretion of hydrogen ions to regulate pH?",
+          options: [
+            {
+              text: "Kidneys",
+              explanation: "Correct. The kidneys excrete hydrogen ions and reabsorb bicarbonate to help regulate blood pH.",
+              isCorrect: true
+            },
+            {
+              text: "Lungs",
+              explanation: "Incorrect. The lungs regulate CO2 levels, which indirectly affects pH, but they do not excrete hydrogen ions.",
+              isCorrect: false
+            },
+            {
+              text: "Liver",
+              explanation: "Incorrect. The liver is not involved in hydrogen ion excretion or direct pH regulation.",
+              isCorrect: false
+            },
+            {
+              text: "Heart",
+              explanation: "Incorrect. The heart pumps blood but does not regulate pH directly.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "What is glomerular filtration?",
+          options: [
+            {
+              text: "The process of filtering blood in the glomerulus",
+              explanation: "Correct. Glomerular filtration is the first step in urine formation, where blood is filtered in the glomerulus.",
+              isCorrect: true
+            },
+            {
+              text: "Reabsorption of sodium in the proximal tubule",
+              explanation: "Incorrect. Reabsorption of sodium occurs after filtration in the renal tubules.",
+              isCorrect: false
+            },
+            {
+              text: "Secretion of wastes into the nephron",
+              explanation: "Incorrect. Secretion occurs later in the process, after filtration, as wastes are actively transported into the nephron.",
+              isCorrect: false
+            },
+            {
+              text: "The excretion of urine from the body",
+              explanation: "Incorrect. Excretion is the final step, involving the release of urine from the bladder.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "How is blood pressure regulated by the renin-angiotensin system?",
+          options: [
+            {
+              text: "By causing vasoconstriction and stimulating aldosterone release",
+              explanation: "Correct. The renin-angiotensin system increases blood pressure by causing vasoconstriction and increasing sodium retention through aldosterone.",
+              isCorrect: true
+            },
+            {
+              text: "By increasing water excretion",
+              explanation: "Incorrect. The renin-angiotensin system conserves water and sodium to increase blood pressure.",
+              isCorrect: false
+            },
+            {
+              text: "By stimulating ADH release",
+              explanation: "Incorrect. While ADH is involved in water balance, it is not the primary hormone regulated by the renin-angiotensin system.",
+              isCorrect: false
+            },
+            {
+              text: "By decreasing blood volume",
+              explanation: "Incorrect. The renin-angiotensin system increases blood volume to raise blood pressure.",
+              isCorrect: false
+            }
+          ]
+        },
+        {
+          categoryName: "APY II Test 3",
+          text: "How is blood pressure regulated by the renin-angiotensin system?",
+          options: [
+            {
+              text: "By causing vasoconstriction and stimulating aldosterone release",
+              explanation: "Correct. The renin-angiotensin system increases blood pressure by causing vasoconstriction and increasing sodium retention through aldosterone.",
+              isCorrect: true
+            },
+            {
+              text: "By increasing water excretion",
+              explanation: "Incorrect. The renin-angiotensin system conserves water and sodium to increase blood pressure.",
+              isCorrect: false
+            },
+            {
+              text: "By stimulating ADH release",
+              explanation: "Incorrect. While ADH is involved in water balance, it is not the primary hormone regulated by the renin-angiotensin system.",
+              isCorrect: false
+            },
+            {
+              text: "By decreasing blood volume",
+              explanation: "Incorrect. The renin-angiotensin system increases blood volume to raise blood pressure.",
+              isCorrect: false
+            }
+          ]
+        },
+      ],
     },   
+    {
+      name: "APY II Final",
+      flashcards: [],
+      questions: []
+    }
   ],
 };
 
